@@ -19,13 +19,19 @@ class Base_sprite(pg.sprite.Sprite):
       self.speed_x = speed_x
       self.speed_y = speed_y
 
+    def update(self):
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
 
+class Player(Base_sprite):
+    def update(self):
+        super().update()
 
 players = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 
-player1 = Base_sprite('images/ping_rocket1.png', 40, 225, 30, 150)
-player2 = Base_sprite('images/ping_rocket2.png', 730, 225, 30, 150)
+player1 = Player('images/ping_rocket1.png', 40, 225, 30, 150)
+player2 = Player('images/ping_rocket2.png', 730, 225, 30, 150)
 players.add(player1)
 players.add(player2)
 all_sprites.add(player1)
@@ -41,21 +47,21 @@ while play:
             play = False
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_UP:
-                player1.speed_y = 5
-            if event.key == pg.K_DOWN:
                 player1.speed_y = -5
+            if event.key == pg.K_DOWN:
+                player1.speed_y = 5
         if event.type == pg.KEYUP:
             if event.key == pg.K_LEFT:
-                    hero.speed_y = 0
+                player1.speed_y = 0
             if event.key == pg.K_RIGHT:
-                    hero.speed_y = 0
+                player1.speed_y = 0
 
     if game:
        
 
 
-       all_sprites.draw(mw)
-       all_sprites.update()
+        all_sprites.draw(mw)
+        all_sprites.update()
 
 
 
