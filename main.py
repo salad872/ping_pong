@@ -26,6 +26,8 @@ class Base_sprite(pg.sprite.Sprite):
 class Player(Base_sprite):
     def update(self):
         super().update()
+    
+
 
 players = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
@@ -50,18 +52,25 @@ while play:
                 player1.speed_y = -5
             if event.key == pg.K_DOWN:
                 player1.speed_y = 5
+            if event.key == pg.K_w:
+                player2.speed_y = -5
+            if event.key == pg.K_s:
+                player2.speed_y = 5
         if event.type == pg.KEYUP:
-            if event.key == pg.K_LEFT:
+            if event.key == pg.K_UP:
                 player1.speed_y = 0
-            if event.key == pg.K_RIGHT:
+            if event.key == pg.K_DOWN:
                 player1.speed_y = 0
+            if event.key == pg.K_w:
+                player2.speed_y = 0
+            if event.key == pg.K_s:
+                player2.speed_y = 0
+    
+    if player1.rect.y > win_size[1]-150:
+        player1.speed_y = 0
 
-    if game:
-       
-
-
-        all_sprites.draw(mw)
-        all_sprites.update()
+    all_sprites.draw(mw)
+    all_sprites.update()
 
 
 
